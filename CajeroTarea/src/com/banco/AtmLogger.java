@@ -1,68 +1,62 @@
-package com.banco;
+ package com.banco;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class AtmLogger {
-	private LocalDateTime dateTime;
-	private String activity;
-	private double amount;
-	
-	private AtmLogger(String activity,  double amount) {
-		this.activity = activity;
-		this.amount = amount;
-		this.dateTime = LocalDateTime.now();
-	}
+  private LocalDateTime dateTime;
+  private String activity;
+  private double amount;
 
-	public String getActivity() {
-		return activity;
-	}
+  private AtmLogger(String activity, double amount) {
+    this.activity = activity;
+    this.amount = amount;
+    this.dateTime = LocalDateTime.now();
+  }
 
-	public void setActivity(String activity) {
-		this.activity = activity;
-	}
+  public String getActivity() {
+    return activity;
+  }
 
-	public double getAmount() {
-		return amount;
-	}
+  public void setActivity(String activity) {
+    this.activity = activity;
+  }
 
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+  public double getAmount() {
+    return amount;
+  }
 
-	public LocalDateTime getDateTime() {
-		return dateTime;
-	}
+  public void setAmount(double amount) {
+    this.amount = amount;
+  }
 
-	@Override
-	public String toString() {
-        
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY/MM/dd hh:mm");
-        String formattedDateTime = this.dateTime.format(formatter);
-		StringBuilder builder = new StringBuilder();
-		builder.append(formattedDateTime);
-		builder.append( getActivity() );	
-		builder.append( getAmount() );	
-		return builder.toString();
-	}
-	
-	public static AtmLogger depositRegister(double amount) {
-		return new AtmLogger("Deposito a cuenta de cheques de $", amount); 
-	}
-	
-	public static AtmLogger depositCreditRegister(double amount) {
-		return new AtmLogger("Depósito a TC de $", amount); 
-	}
-	
-	public static AtmLogger withdrawRegister(double amount) {
-		return new AtmLogger("Retiro de $", amount); 
-	}
+  public LocalDateTime getDateTime() {
+    return dateTime;
+  }
 
-//	public static AtmLogger errorRegister(double amount) {
-//		return new AtmLogger("error", amount); 
-//	}
+  @Override
+  public String toString() {
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm");
+    String formattedDateTime = this.dateTime.format(formatter);
+    StringBuilder builder = new StringBuilder();
+    builder.append(formattedDateTime);
+    builder.append(getActivity());
+    builder.append(getAmount());
+    return builder.toString();
+  }
+
+  public static AtmLogger depositRegister(double amount) {
+    return new AtmLogger(" Deposito a cuenta de cheques de $", amount);
+  }
+
+  public static AtmLogger depositCreditRegister(double amount) {
+    return new AtmLogger(" Depósito a TC de $", amount);
+  }
+
+  public static AtmLogger withdrawRegister(double amount) {
+    return new AtmLogger(" Retiro de $", amount);
+  }
 
 }
 
-	
 	
