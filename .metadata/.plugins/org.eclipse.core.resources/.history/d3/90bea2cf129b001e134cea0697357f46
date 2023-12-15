@@ -1,0 +1,116 @@
+package com.banco;
+
+import java.util.Scanner;
+
+public class AtmTest {
+	public static void main(String[] args) {
+
+		Atm cajero01 = new Atm();
+		Scanner sc = new Scanner(System.in);
+		boolean isActive = true;
+		int salir = 0;
+
+		double cantidadRetirar = 0;
+		double cheques = 0;
+		double credito = 0;
+		
+
+		do {
+			System.out.println("Bienvenido a BancaCh34\n");
+			System.out.println("\t Marca ");
+			System.out.println("\t 1: Retirar dinero ");
+			System.out.println("\t 2: Hacer depositos ");
+			System.out.println("\t 3: Consultar saldo");
+			System.out.println("\t 4: Quejas");
+			System.out.println("\t 5: Ver ultimos movimientos");
+			System.out.println("\t 9: Salir del cajero");
+			System.out.print("Introduce la opcion elegida: ");
+			int opcion = sc.nextInt();
+
+			switch (opcion) {
+			case 1:
+				salir = 0;
+				System.out.println("\t Opcion 1)  Retirar dinero ");
+				cajero01.withdraw(sc);
+
+				System.out.print("¿Desea donar $200 para la graduación de ch30? (S/N):  ");
+				String respuesta = sc.next();
+				if (respuesta.equalsIgnoreCase("S")) {
+					cajero01.setBalance(cajero01.getBalance() - 200);
+					cajero01.setBalanceDonaciones(cajero01.getBalanceDonaciones() + 200);
+					System.out.println("Gracias por tu donacion, estamos cada vez mas cerca de la meta: " + cajero01.getBalanceDonaciones());
+					
+				}
+
+				break;
+
+			case 2:
+				salir = 0;
+				System.out.println("\tOpcion 2: Hacer depositos ");
+				
+				System.out.println("\t\t 1: Cuenta de cheques");
+				System.out.println("\t\t 2: Tarjeta de credito");
+
+				System.out.print("Introduce  la opcion elegida: ");
+				int opcionDeposito = sc.nextInt();
+
+				if (opcionDeposito == 1) {
+					cajero01.deposit(sc);
+
+				} else {
+					cajero01.depositCredit(sc);
+
+				}
+
+//    		
+//    			   Sumar la cantidad depositada al saldo disponible
+//    			   Solo depósitos múltiplos de $50
+//    			   Restar al saldo disponible
+//    			   Se puede incluir decimales (2 decimales, por ejemplo: $100.23)
+
+				break;
+
+			case 3:
+				salir = 0;
+				System.out.println("\tOpcion 3: Consultar saldo");
+				System.out.println("El balance de su cuenta es de: " + "$" + cajero01.getBalance());
+				break;
+			case 4:
+				salir = 0;
+				System.out.println("\"No disponible por el momento, intente más tarde\"");
+
+				break;
+			case 5:
+				salir = 0;
+				System.out.println("\tOpcion 5: Ver ultimos 5 movimientos");
+				cajero01.printLog();
+//    	
+				break;
+			case 6, 7, 8:
+
+				salir++;
+				System.out.println("Opción inválida, por favor, vuelva a intentar");
+
+				if (salir == 3) {
+					isActive = false;
+				}
+
+				break;
+			case 9:
+
+				System.out.println("Gracias por tu visita, vuelve pronto");
+				isActive = false;
+				break;
+
+			default:
+				System.out.println("Opción inválida, por favor ingresa un numero del 1 al 5 o 9 para salir");
+			}
+		}
+
+		while (isActive);
+		System.out.println("No olvide retirar su tarjeta");
+
+		// ==============================================================================================================
+
+	}
+}

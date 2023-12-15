@@ -1,0 +1,121 @@
+package com.banco;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Atm {
+	
+	private double balanceCredito;
+	private double balanceCheques;
+	private double balanceDonaciones;
+	private double balance;
+	private ArrayList<AtmLogger> log;
+	Scanner scanner = new Scanner(System.in);
+	
+	public Atm(){
+		
+		this.balance = 10_000;
+		this.log = new ArrayList<>();
+	
+		
+	}
+	
+	public Atm(double credito, double cheques) {
+			this.balanceCredito = credito;
+			this.balanceCheques = cheques;	
+	}
+	
+
+	public Atm(double balance) {
+		this();
+		this.balance = balance;
+	}
+
+	public double getBalance(){
+		return this.balance; 
+	}
+	
+	private void setBalance(double balance) { 
+		this.balance = balance;
+	}
+	
+
+	public double getBalanceCredito() {
+		return balanceCredito;
+	}
+
+	public void setBalanceCredito(double balanceCredito) {
+		this.balanceCredito = balanceCredito;
+	}
+
+	public double getBalanceCheques() {
+		return balanceCheques;
+	}
+
+	public void setBalanceCheques(double balanceCheques) {
+		this.balanceCheques = balanceCheques;
+	}
+
+	public void deposit(double amount ) {
+		if ( amount > 0  ) {
+			setBalance( getBalance() + amount ); // this.balance += amount;
+			log.add( AtmLogger.depositRegister(amount));
+		} else {
+			// System.out.println("No se permite depósitos igual o menor a cero");
+			log.add( AtmLogger.errorRegister(amount));
+			throw new IllegalArgumentException("No se permite depósitos igual o menor a cero");
+		}		
+	}
+	
+	public void depositCredit (double amount) {
+		
+	}
+	
+	
+
+	// Verificar que el amount no sea negativo o mayor al balance
+	// enviar un mensaje en consola de acuerdo a la situación.
+	public void withdraw(double amount ) {
+		System.out.print("Ingrese la cantidad a retirar (múltiplos de $50): ");
+        
+		if( amount <= 0 ) {
+			log.add( AtmLogger.errorRegister(amount));
+			throw new IllegalArgumentException("Cantidad menor o igual a cero");
+		}else if( amount>= 6000) {
+			log.add(AtmLogger.errorRegister(amount));
+			throw new IllegalStateException("No se puede retirar montos iguales o superiores a $6,000.00 pesos");
+		}else if (amount % 50 != 0) {
+	            System.out.println("La cantidad debe ser múltiplo de $50.");
+	            return;
+	        		
+		} else if( amount > getBalance() ) {
+			log.add( AtmLogger.errorRegister(amount));
+			throw new IllegalStateException("Fondos insuficientes");
+			
+		}else if{
+			System.out.println("¿Desea donar $200 para la graduación de ch30? (S/N): ");
+		        String respuesta = scanner.next();
+		        if (respuesta.equalsIgnoreCase("S")) {
+		            saldo -= 200;
+		     
+		    }	
+		} else {
+			setBalance( getBalance() - amount  );
+			log.add( AtmLogger.withdrawRegister(amount));			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	public void printLog() {
+		for (int i = 0; i < log.size(); i++) {
+			System.out.println(log.get(i));
+		}
+	}
+	
+}

@@ -1,0 +1,126 @@
+package com.banco;
+import java.util.Scanner;
+
+public class CajeroAutomatico {
+
+
+
+	    private static double saldo = 10000.0;
+	    private static int intentosInvalidos = 0;
+
+	    public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+
+	        while (true) {
+	            // Mostrar el menú
+	            mostrarMenu();
+
+	            // Leer la opción del usuario
+	            int opcion = scanner.nextInt();
+
+	            // Procesar la opción
+	            switch (opcion) {
+	                case 1:
+	                    retirarDinero(scanner);
+	                    break;
+	                case 2:
+	                    hacerDeposito(scanner);
+	                    break;
+	                case 3:
+	                    consultarSaldo();
+	                    break;
+	                case 4:
+	                    mostrarQuejas();
+	                    break;
+	                case 5:
+	                    mostrarUltimosMovimientos();
+	                    break;
+	                case 9:
+	                    salir();
+	                    break;
+	                default:
+	                    mostrarOpcionInvalida();
+	            }
+
+	            // Incrementar el contador de intentos inválidos si es necesario
+	            if (opcion < 1 || opcion > 9) {
+	                intentosInvalidos++;
+	            } else {
+	                intentosInvalidos = 0;
+	            }
+
+	            // Salir del sistema si se han superado 3 intentos inválidos consecutivos
+	            if (intentosInvalidos >= 3) {
+	                salir();
+	            }
+	        }
+	    }
+
+	    private static void mostrarMenu() {
+	        System.out.println("** Menú de cajero automático **");
+	        System.out.println("1) Retirar dinero");
+	        System.out.println("2) Hacer depósitos");
+	        System.out.println("3) Consultar saldo");
+	        System.out.println("4) Quejas");
+	        System.out.println("5) Ver últimos movimientos");
+	        System.out.println("9) Salir");
+	        System.out.print("Ingrese su opción: ");
+	    }
+
+	    private static void retirarDinero(Scanner scanner) {
+	        // Mostrar la cantidad disponible a retirar
+	        System.out.println("Cantidad disponible a retirar: $" + saldo);
+
+	        // Solicitar la cantidad a retirar
+	        System.out.print("Ingrese la cantidad a retirar (múltiplos de $50): ");
+	        double cantidad = scanner.nextDouble();
+
+	        // Validar la cantidad
+	        if (cantidad <= 0) {
+	            System.out.println("La cantidad debe ser mayor que 0.");
+	            return;
+	        }
+	        if (cantidad > 6000) {
+	            System.out.println("El monto máximo a retirar es de $6000.");
+	            return;
+	        }
+	        if (cantidad % 50 != 0) {
+	            System.out.println("La cantidad debe ser múltiplo de $50.");
+	            return;
+	        }
+
+	        // Retirar el dinero
+	        saldo -= cantidad;
+
+	        // Preguntar si desea donar $200
+	        System.out.println("¿Desea donar $200 para la graduación de ch30? (S/N): ");
+	        String respuesta = scanner.next();
+	        if (respuesta.equalsIgnoreCase("S")) {
+	            saldo -= 200;
+	        }
+
+	        // Mostrar el saldo restante
+	        System.out.println("Saldo restante: $" + saldo);
+	    }
+
+	    private static void hacerDeposito(Scanner scanner) {
+	        // Mostrar el menú de depósitos
+	        System.out.println("** Menú de depósitos **");
+	        System.out.println("1) Depósito a cuenta de cheques");
+	        System.out.println("2) Depósito a tarjeta de crédito");
+	        System.out.print("Ingrese su opción: ");
+	        int opcion = scanner.nextInt();
+
+	        // Procesar el depósito
+	        switch (opcion) {
+	            case 1:
+	                hacerDepositoACuentaCheques(scanner);
+	                break;
+	            case 2:
+	                hacerDepositoATarjetaCredito(scanner);
+	Utiliza el código con precaución. Más información
+
+
+
+	Bard puede mostrar información inexacta, también sob
+}

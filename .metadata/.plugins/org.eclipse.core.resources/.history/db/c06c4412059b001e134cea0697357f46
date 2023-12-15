@@ -1,0 +1,126 @@
+package com.banco;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Atm {
+	
+	private double balanceCredito;
+	private double balanceCheques;
+	private double balanceDonaciones;
+	private double balance = 10_000;
+	private ArrayList<AtmLogger> log;
+	Scanner scanner = new Scanner(System.in);
+	
+	public Atm(){
+		this.log = new ArrayList<>();
+		
+	}
+	
+
+	
+	
+	
+	//============== get and set =========================================================
+
+
+	public double getBalance(){
+		return this.balance; 
+	}
+	
+	public void setBalance(double balance) { 
+		this.balance = balance;
+	}
+	
+	public double getBalanceCredito() {
+		return balanceCredito;
+	}
+
+	public void setBalanceCredito(double balanceCredito) {
+		this.balanceCredito = balanceCredito;
+	}
+
+	public double getBalanceCheques() {
+		return balanceCheques;
+	}
+
+	public void setBalanceCheques(double balanceCheques) {
+		this.balanceCheques = balanceCheques;
+	}
+
+	public double getBalanceDonaciones() {
+		return balanceDonaciones;
+	}
+
+
+	public void setBalanceDonaciones(double balanceDonaciones) {
+		this.balanceDonaciones = balanceDonaciones;
+	}
+	
+
+//====================deposito====================================================
+
+
+	public void deposit(double amount ) {
+		if ( amount > 0  ) {
+			setBalance( getBalance() + amount ); // this.balance += amount;
+			log.add( AtmLogger.depositRegister(amount));
+		} else {
+			// System.out.println("No se permite depósitos igual o menor a cero");
+			log.add( AtmLogger.errorRegister(amount));
+			throw new IllegalArgumentException("No se permite depósitos igual o menor a cero");
+		}		
+	}
+	
+	public void depositCredit (double amount) {
+		
+	}
+	
+//==================retirar===========================================	
+
+	
+	public void withdraw(Scanner scanner) {
+		//----------muestra el balance 
+		System.out.println("Cantidad disponible a retirar: $" + this.balance); 
+		
+		System.out.print("Ingrese la cantidad a retirar (múltiplos de $50): ");
+		double amount = scanner.nextDouble();  
+		//-----------cantidad minima 50 
+		if( amount <= 0 ) {
+			log.add( AtmLogger.errorRegister(amount));
+			throw new IllegalArgumentException("Cantidad menor o igual a cero");
+	    // ----------- maximo a retirar 
+		}else if( amount>= 6000) {
+			log.add(AtmLogger.errorRegister(amount));
+			throw new IllegalStateException("No se puede retirar montos iguales o superiores a $6,000.00 pesos");
+		//--------------multiplos de 50	
+		}else if (amount % 50 != 0) {
+			log.add( AtmLogger.errorRegister(amount));
+			throw new IllegalStateException("La cantidad debe ser múltiplo de $50.");
+		//-----------	
+		} else if( amount > getBalance() ) {
+			log.add( AtmLogger.errorRegister(amount));
+			throw new IllegalStateException("Fondos insuficientes");     
+		    	
+		} else {
+			setBalance( getBalance() - amount  );
+			log.add( AtmLogger.withdrawRegister(amount));
+			System.out.println("Saldo actual: " + this.balance);
+			System.out.println("Gracias por tu donacion, ahora tenermos: " + this.balanceDonaciones);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	public void printLog() {
+		for (int i = 0; i < log.size(); i++) {
+			System.out.println(log.get(i));
+		}
+	}
+	
+}

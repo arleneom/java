@@ -1,0 +1,126 @@
+package com.banco;
+
+import java.util.Scanner;
+
+public class AtmTest {
+       public static void main(String[] args) {
+    	   
+        Atm cajero01 = new Atm();   
+        Scanner sc = new Scanner(System.in);
+   		boolean isActive = true;
+   		int response,
+   		salir = 0;
+   		double cheques= 0;
+   		double credito = 0;
+   		int opcionDeposito = 0;
+   		double cantidadRetirar = 0;
+   		double donaciones = 0;
+   		
+   		
+    	   
+    	  do {
+    	   System.out.println("Bienvenido a BancaCh34\n" );
+    	   System.out.println("Opciones del cajero: "  );
+    	   System.out.println("\tOpcion 1: Retirar dinero ");
+    	   System.out.println("\tOpcion 2: Hacer depositos ");
+    	   System.out.println("\tOpcion 3: Consultar saldo");
+    	   System.out.println("\tOpcion 4: Quejas");
+    	   System.out.println("\tOpcion 5: Ver ultimos movimientos");
+    	   System.out.println("\tOpcion 9: Salir del cajero");
+    	   System.out.print("Introduce el numero de la opcion elegida: " );
+    	   response = sc.nextInt();
+           
+    	   switch (response) {
+    	   case 1: 
+    		   salir=0;
+    		   System.out.println("\tOpcion 1: Retirar dinero ");
+    		   System.out.println("El balance de su cuenta es de: " + "$" +  cajero01.getBalance());
+    		   System.out.println();
+    		   cantidadRetirar = sc.nextInt();
+    		   
+    		   
+//    		   Mostrar la cantidad disponible a retirar.
+//    		   No se puede retirar más de $6,000.00
+//    		   Solo se puede retirar múltiplos de $50.00
+//    		   Una vez retirado el monto preguntar: ¿Desea donar $200 para la graduacón de ch30?
+    		   
+    	     break;
+    	   case 2:
+    		   salir=0;
+    		   System.out.println("\tOpcion 2: Hacer depositos ");
+    		   System.out.println("\t\tOpcion 1: Cuenta de cheques");
+    		   System.out.println("\t\tOpcion 2: Tarjeta de credito");
+    		  opcionDeposito = sc.nextInt( );		   
+    		if (opcionDeposito == 1) { System.out.println("Cuanto desea depositar en su cuenta de cheques: "); 
+    		                           cheques = sc.nextInt();
+    	   }else {   System.out.println("Cuanto desea depositar en su tarjeta de credito: ");       
+    		                      credito = sc.nextInt();}
+//    		
+//    			   Sumar la cantidad depositada al saldo disponible
+//    			   Solo depósitos múltiplos de $50
+//    			   Restar al saldo disponible
+//    			   Se puede incluir decimales (2 decimales, por ejemplo: $100.23)
+    		  
+     	     break;
+    
+    	   case 3:
+    		   salir=0;
+    		   System.out.println("\tOpcion 3: Consultar saldo");
+    		   System.out.println("El balance de su cuenta es de: " + "$" +  cajero01.getBalance());
+    	     break;
+    	   case 4:
+    		   salir=0;
+    		   System.out.println("\"No disponible por el momento, intente más tarde\"");
+    		   
+      	     break;
+    	   case 5:
+    		   salir=0;
+    		   System.out.println("\tOpcion 5: Ver ultimos movimientos");
+//    		   Mostrar los movimientos: depósitos y retiros
+//    		   Formato para mostrar
+//    		        YYYY/MM/DD hh:mm Retiro de $500
+//    		        YYYY/MM/DD hh:mm Depósito a TC de $300.12
+//    		        YYYY/MM/DD hh:mm Retiro de $300
+//    		        YYYY/MM/DD hh:mm Retiro de $100
+//    		        YYYY/MM/DD hh:mm Depósito a TC de $30.11
+      	     break;
+    	   case  6, 7, 8: 
+    		 
+    		   salir++;
+    		   System.out.println("Opción inválida, por favor, vuelva a intentar"); 
+    		   
+    		   if (salir == 3) {
+    		    	isActive = false;}
+    		          	        
+      	     break;
+    	   case 9:
+    		   
+        	     System.out.println("Gracias por tu visita, vuelve pronto");
+        	     isActive = false;
+        	     break;  
+    	 
+    	   default:
+    		   System.out.println("Opción inválida, por favor ingresa un numero del 1 al 5 o 9 para salir");
+    	 } }
+    	   
+       while( isActive);     	  
+    	   System.out.println("No olvide retirar su tarjeta");
+    	   
+    	   
+    	   
+           
+    	    
+    	   
+    	   
+    	  
+   			
+   			
+//   		
+//   			if( response != 's' ) isActive = false;
+//   			else isActive = true;
+//   		} while( isActive );
+//   		System.out.println("Hasta pronto, termina do-while");
+//   	}
+    	    
+}
+}

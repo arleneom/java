@@ -1,0 +1,90 @@
+package com.banco;
+
+import java.util.Scanner;
+
+public class AtmTest {
+       public static void main(String[] args) {
+    	   
+        Atm cajero01 = new Atm();   
+        Scanner sc = new Scanner(System.in);
+   		boolean isActive = true;
+   		int response,
+   		salir = 0;
+    	   
+    	  do {
+    	   System.out.println("Bienvenido a BancaCh34\n" );
+    	   System.out.println("Opciones del cajero: "  );
+    	   System.out.println("\tOpcion 1: Retirar dinero ");
+    	   System.out.println("\tOpcion 2: Hacer depositos ");
+    	   System.out.println("\tOpcion 3: Consultar saldo");
+    	   System.out.println("\tOpcion 4: Quejas");
+    	   System.out.println("\tOpcion 5: Ver ultimos movimientos");
+    	   System.out.println("\tOpcion 9: Salir del cajero");
+    	   System.out.print("Introduce el numero de la opcion elegida: " );
+    	   response = sc.nextInt();
+           
+    	   switch (response) {
+    	   case 1: 
+    		   salir=0;
+    		   System.out.println("\tOpcion 1: Retirar dinero ");
+    		   System.out.println();
+    		   
+    	     break;
+    	   case 2:
+    		   salir=0;
+    		   System.out.println("\tOpcion 2: Hacer depositos ");
+    		  
+//    	     break;
+    
+    	   case 3:
+    		   salir=0;
+    		   System.out.println("\tOpcion 3: Consultar saldo");
+    	     break;
+    	   case 4:
+    		   salir=0;
+    		   System.out.println("\"No disponible por el momento, intente más tarde\"");
+    		   
+      	     break;
+    	   case 5:
+    		   salir=0;
+    		   System.out.println("\tOpcion 5: Ver ultimos movimientos");
+      	     break;
+    	   case  6, 7, 8: 
+    		 
+    		   salir++;
+    		   System.out.println("Opción inválida, por favor, vuelva a intentar"); 
+    		   
+    		   if (salir == 3) {
+    		    	isActive = false;}
+    		          	        
+      	     break;
+    	   case 9:
+    		   
+        	     System.out.println("Gracias por tu visita, vuelve pronto");
+        	     isActive = false;
+        	     break;  
+    	 
+    	   default:
+    		   System.out.println("Opción inválida, por favor ingresa un numero del 1 al 5 o 9 para salir");
+    	 } }
+    	   
+       while( isActive);     	  
+    	   System.out.println("No olvide retirar su tarjeta");
+    	   
+    	   
+    	   
+           
+    	   
+    	   
+    	  
+   			
+   			
+//   		
+//   			if( response != 's' ) isActive = false;
+//   			else isActive = true;
+//   		} while( isActive );
+//   		System.out.println("Hasta pronto, termina do-while");
+//   	}
+    	    
+}
+}
